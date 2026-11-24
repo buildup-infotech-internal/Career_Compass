@@ -1,15 +1,15 @@
-
 import uuid
+from typing import Any
 
-from sqlalchemy import CheckConstraint, DateTime, ForeignKey, String, func
+from sqlalchemy import CheckConstraint, ForeignKey, String
 from sqlalchemy.dialects.postgresql import JSONB, UUID
 from sqlalchemy.orm import Mapped, mapped_column
-
 
 from app.db.base import Base
 from app.db.mixins import TimestampMixin
 
-class Profile(TimestampMixin,Base):
+
+class Profile(TimestampMixin, Base):
     __tablename__ = "profiles"
 
     __table_args__ = (
@@ -40,12 +40,12 @@ class Profile(TimestampMixin,Base):
         nullable=True,
     )
 
-    education: Mapped[dict | None] = mapped_column(
+    education: Mapped[list[dict[str, Any]] | None] = mapped_column(
         JSONB,
         nullable=True,
     )
 
-    experience: Mapped[dict | None] = mapped_column(
+    experience: Mapped[list[dict[str, Any]] | None] = mapped_column(
         JSONB,
         nullable=True,
     )
